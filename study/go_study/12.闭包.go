@@ -3,7 +3,8 @@ package main
 import "fmt"
 
 // 函数awaitAdd返回的是一个匿名函数，该匿名函数接收切片参数
-func awaitAdd(awaitSecond int) func(...int) (s int) {
+// go语言中函数可以返回另一个函数,返回后需要定义该函数
+func awaitAdd(awaitSecond int) func(list ...int) (s int) {
 	return func(numbers ...int) (sum int) {
 		for _, i := range numbers {
 			sum += i
