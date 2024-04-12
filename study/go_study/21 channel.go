@@ -31,6 +31,7 @@ func main() {
 	go pay("王五", 2, &wait)
 
 	//并行函数，但是会等待上边三个函数执行完毕后执行close(moneyChan)
+	//匿名函数直接调用
 	go func() {
 		wait.Wait()
 		close(moneyChan)

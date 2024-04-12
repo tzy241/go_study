@@ -13,6 +13,29 @@ func awaitAdd(awaitSecond int) func(list ...int) (s int) {
 	}
 }
 
+// 闭包示例1.,闭包函数中注意变量名不要重复使用，函数名中如果没有指定变量名此时返回值不需要加括号，返回时就需要指定要返回的变量
+func addNumbers(base int) func(int) int {
+	return func(i int) int {
+		base += i
+		return base
+	}
+}
+
+// 闭包示例2：返回两个函数的函数
+func testTwoReturn(base int) (func(int) int, func(int) int) {
+	add := func(i int) int {
+		base += i
+		return base
+	}
+
+	sub := func(i int) int {
+		base -= i
+		return base
+	}
+
+	return add, sub
+}
+
 // 引用传参不就是传指针嘛
 func set(name *string) {
 	*name = "枫枫"
@@ -27,4 +50,9 @@ func main() {
 	fmt.Println(s)
 	set(&s)
 	fmt.Println(s)
+
+	tmp1 := addNumbers(100)
+	fmt.Println(tmp1(1), tmp1(2), tmp1(3))
+	f1, f2 := testTwoReturn(10)
+	fmt.Println(f1(1), f2(1))
 }
